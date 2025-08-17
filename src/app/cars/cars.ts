@@ -76,7 +76,7 @@ export class CarsComponent {
     { active: false, name: "Chevrolet" }
   ];
 
-  orderFrom = new FormGroup({
+  orderForm = new FormGroup({
     car: new FormControl(''),
     name: new FormControl(''),
     phone: new FormControl(''),
@@ -103,14 +103,14 @@ export class CarsComponent {
   }
 
   isError(fieldName: string) {
-    const control = this.orderFrom.get(fieldName);
+    const control = this.orderForm.get(fieldName);
     return !!(control?.invalid && (control?.dirty || control?.touched))
   }
 
   sendOrder() {
-    if(this.orderFrom.valid) {
+    if(this.orderForm.valid) {
       alert('Спасибо за заявку! Мы скоро свяжемся с вами');
-      this.orderFrom.reset();  
+      this.orderForm.reset();  
     }
   }
 }

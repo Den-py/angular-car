@@ -71,17 +71,17 @@
 <section class="order" id="order">
   <div class="container">
     <img src="images/order-car.png" alt="Order car" />
-    <form>
+    <form [formGroup]="orderFrom">
       <h3>Забронируйте автомобиль</h3>
       <p>
         Заполните контактные данные, и мы перезвоним вам для обсуждения деталей
         и подтверждения бронирования
       </p>
       <div class="order-form">
-        <input type="text" placeholder="Автомобиль" id="form-car" />
-        <input type="text" placeholder="Ваше имя" id="form-name" />
-        <input type="text" placeholder="Ваш телефон" id="form-phone" />
-        <button class="button" type="button" id="order-action">
+        <input type="text" placeholder="Автомобиль" id="form-car" required formControlName="car" [class.error]="isError('car')"/>
+        <input type="text" placeholder="Ваше имя" id="form-name" required formControlName="name" [class.error]="isError('name')"/>
+        <input type="text" placeholder="Ваш телефон" id="form-phone" required minlength="10" formControlName="phone" [class.error]="isError('phone')"/>
+        <button class="button" type="button" id="order-action" (click)="sendOrder()" [disabled]="!orderFrom.valid">
           Забронировать
         </button>
       </div>

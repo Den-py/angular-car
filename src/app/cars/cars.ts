@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
+import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-cars",
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: "./cars.html",
   styleUrl: "./cars.css",
 })
@@ -75,6 +76,12 @@ export class CarsComponent {
     { active: false, name: "Chevrolet" }
   ];
 
+  orderFrom = new FormGroup({
+    car: new FormControl(''),
+    name: new FormControl(''),
+    phone: new FormControl(''),
+  })
+
   ngOnInit() {
     this.cars = this.baseCars;
   }
@@ -93,5 +100,17 @@ export class CarsComponent {
     }
 
     carsContent.scrollIntoView({ behavior: 'instant' });
+  }
+
+  isError(fieldName: string) {
+    const control = this.orderFrom.get(fieldName);
+    return !!(control?.invalid && (control?.dirty || control?.touched))
+  }
+
+  sendOrder() {
+    if(this.orderFrom.valid) {
+      alert('Спасибо за заявку! Мы скоро свяжемся с вами');
+      this.orderFrom.reset();  
+    }
   }
 }

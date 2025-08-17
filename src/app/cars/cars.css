@@ -19,8 +19,15 @@
     font-size: 24px;
   }
   
-  .button:hover {
+  .button:hover:not(:disabled) {
     background-color: #a7b4c4;
+  }
+
+  .button:disabled {
+    cursor: not-allowed;
+    color: gray;
+    background-color: #343434;
+
   }
   
   .button.white-button {
@@ -303,6 +310,10 @@
     margin-bottom: 15px;
     font-size: 16px;
     outline: none;
+  }
+
+  .order-form input.error {
+    border-color: red;
   }
   
   .footer {
